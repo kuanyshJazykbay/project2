@@ -1,4 +1,4 @@
-package kz.app.commonfto;
+package kz.app.commondto;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
