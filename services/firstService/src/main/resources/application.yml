@@ -3,10 +3,35 @@ spring:
     name: first-service
   kafka:
     bootstrap-servers: localhost:9093
+
+
+    consumer:
+      group-id: ${spring.application.name}-group
+      auto-offset-reset: earliest
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+      properties:
+        spring.json.trusted.packages: "*"
+        spring.json.type.mapping: appeal:kz.app.commondto.dto.AppealRequestDTO
+        spring.json.value.default.type: kz.app.commondto.dto.AppealRequestDTO
+        spring.json.use.type.headers: false
+
     producer:
       key-serializer: org.apache.kafka.common.serialization.StringSerializer
       value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
       properties:
-        spring.json.add.type.headers: false
+
+        spring.json.type.mapping: result:kz.app.commondto.dto.ModerationResultDTO
+        spring.json.add.type.headers: true
+
+  rest:
+    service2:
+      url: http://localhost:8081/api/v1/appeals
+
 server:
   port: 8080
+
+  moderation:
+    work-start: "09:00"
+    work-end: "18:00"
+    categories-off-hours: "URGENT,COMPLAINT"
