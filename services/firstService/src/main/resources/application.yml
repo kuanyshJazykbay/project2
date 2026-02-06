@@ -31,7 +31,7 @@ spring:
 server:
   port: 8080
 
-  moderation:
+moderation:
     work-start: "09:00"
     work-end: "18:00"
     categories-off-hours: "URGENT,COMPLAINT"
